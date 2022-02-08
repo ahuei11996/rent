@@ -1,0 +1,63 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/manage/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},{
+			"path": "pages/manage/detail",
+			"style": {
+				"navigationBarTitleText": "房子详情"
+			}
+		},{
+			"path": "pages/user/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},{
+			"path": "pages/user/login",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "出租屋管理",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FAFAFA"
+	},	
+	"tabBar": {
+		"color":"#CCCCCC",
+		"selectedColor": "#545454",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle":"white",
+		"list":[
+			{
+				"pagePath": "pages/manage/index",
+				"text" : "管理台",
+				"iconPath": "static/images/tarbar/index.png",
+				"selectedIconPath":"static/images/tarbar/index_active.png"
+			},
+			{
+				"pagePath": "pages/user/index",
+				"text" : "我的",
+				"iconPath": "static/images/tarbar/my.png",
+				"selectedIconPath":"static/images/tarbar/my_active.png"
+			}
+		]
+	},
+	"condition":{
+		"list":[
+			{
+				"name":"userIndex",
+				"path":"pages/user/index"
+			},
+			{
+				"name":"userLogin",
+				"path":"pages/user/login"
+			}
+		]
+	}
+}
