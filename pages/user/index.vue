@@ -19,7 +19,8 @@
 					</view>
 				</view>
 			</view>
-			<view class="flex-row flex-align-center" v-else  @click="navTo('/pages/user/login')">
+			<!-- navTo('/pages/user/login') -->
+			<view class="flex-row flex-align-center" v-else  @click="loginAction">
 				<u-image class="flex-no-auto-zoom" mode="aspectFill" src="https://cdn.uviewui.com/uview/album/1.jpg" shape="circle" width="106rpx" height="106rpx"></u-image>
 				<view class="margin-left40 flex-auto-zoom">
 					<view class="loginButton">
@@ -117,6 +118,13 @@
 				return this.$store.state.token
 			}
 		},
+		onShow() {
+			uni.login({
+			  provider: 'weixin',
+			  success: function (loginRes) {
+				  },
+			})
+		},
 		methods:{
 			...mapActions (['Logout','SetUser']),
 			userLogout() {
@@ -124,6 +132,18 @@
 			},
 			navTo(url) {
 				uni.$u.route(url)
+			},
+			loginAction() {
+				
+					uni.getUserProfile({
+						desc: "用于用户登陆",
+						success:(res) => {
+							console.log(res);
+						},
+						fail(err) {
+							console.log(err);
+						}
+					})
 			}
 		}
 	}
