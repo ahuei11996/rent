@@ -107,7 +107,7 @@
 		name: "",
 		data() {
 			return {
-				
+				code: null
 			}
 		},
 		computed:{
@@ -119,11 +119,7 @@
 			}
 		},
 		onShow() {
-			uni.login({
-			  provider: 'weixin',
-			  success: function (loginRes) {
-				  },
-			})
+			this.getWechatCode()
 		},
 		methods:{
 			...mapActions (['Logout','SetUser']),
@@ -134,16 +130,35 @@
 				uni.$u.route(url)
 			},
 			loginAction() {
-				
-					uni.getUserProfile({
-						desc: "用于用户登陆",
-						success:(res) => {
-							console.log(res);
-						},
-						fail(err) {
-							console.log(err);
-						}
-					})
+				uni.getUserProfile({
+					desc: "用于用户登陆",
+					success:(res) => {
+						console.log(res);
+						uni.request({
+							url: "http://127.0.0.1:8000/api/user/wxLogin",
+							data: {
+								code: this.code,
+								rawData: res.rawData,
+								signature: res.signature,
+								encryptedData: res.encryptedData,
+								iv: res.iv
+							}
+						})
+					},
+					fail:(err) => {
+						console.log(err);
+						this.getWechatCode()
+					}
+				})
+			},
+			getWechatCode() {
+				uni.login({
+				  provider: 'weixin',
+				  success: (res) => {
+					  console.log(res);
+					  this.code = res.code
+				  }
+				})
 			}
 		}
 	}
