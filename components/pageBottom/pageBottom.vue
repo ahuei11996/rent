@@ -7,7 +7,13 @@
 		name:"pageBottom",
 		computed:{
 			height() {
-				return uni.getSystemInfoSync().safeAreaInsets.bottom + uni.upx2px(40)
+				let bottomHeight = uni.getSystemInfoSync().safeAreaInsets.bottom
+				if(bottomHeight > 0) {
+					return bottomHeight + uni.upx2px(40)
+				} else {
+					return uni.upx2px(40)
+				}
+				
 			}
 		}
 	}
